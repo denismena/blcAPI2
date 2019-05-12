@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BLCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CONTRACTE">
+          <Key>
+            <PropertyRef Name="C_ID" />
+          </Key>
+          <Property Name="C_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="C_NUMAR" Type="int" Nullable="false" />
+          <Property Name="C_DATA" Type="date" Nullable="false" />
+          <Property Name="C_PERSOANA_ID" Type="int" Nullable="false" />
+          <Property Name="C_NR_PERS" Type="int" />
+          <Property Name="C_NR_ADULTI" Type="int" />
+          <Property Name="C_NR_COPII" Type="int" />
+          <Property Name="C_TARA" Type="varchar" MaxLength="50" />
+          <Property Name="C_ORAS" Type="varchar" MaxLength="50" />
+          <Property Name="C_DE_LA_DATA" Type="date" />
+          <Property Name="C_PANA_LA_DATA" Type="date" />
+          <Property Name="C_HOTEL" Type="varchar" MaxLength="50" />
+          <Property Name="C_HOTEL_STELE" Type="int" />
+          <Property Name="C_MENTIUNI" Type="varchar(max)" />
+          <Property Name="C_PRET" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="C_MONEDA" Type="int" />
+          <Property Name="C_AVANS" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="C_DATA_DIFERENTA" Type="date" />
+          <Property Name="C_FACTURA" Type="varchar" MaxLength="50" />
+          <Property Name="C_CHITANTA" Type="varchar" MaxLength="50" />
+          <Property Name="C_AVANS_DATA" Type="date" />
+          <Property Name="C_AVANS2_DATA" Type="date" />
+          <Property Name="C_AVANS2" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="C_FACTURA2" Type="varchar" MaxLength="50" />
+          <Property Name="C_CHITANTA2" Type="varchar" MaxLength="50" />
+          <Property Name="C_DATA_DIFERENTA2" Type="date" />
+          <Property Name="C_AVANS3_DATA" Type="date" />
+          <Property Name="C_AVANS3" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="C_FACTURA3" Type="varchar" MaxLength="50" />
+          <Property Name="C_CHITANTA3" Type="varchar" MaxLength="50" />
+          <Property Name="C_DATA_DIFERENTA3" Type="date" />
+        </EntityType>
+        <EntityType Name="LIBRARIE">
+          <Key>
+            <PropertyRef Name="L_ID" />
+          </Key>
+          <Property Name="L_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="L_NUME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="L_TIP" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSOANE">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_NUME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_PRENUME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_CNP" Type="varchar" MaxLength="15" />
+          <Property Name="P_ID_TYPE" Type="int" />
+          <Property Name="P_DATA_NASTERII" Type="date" />
+          <Property Name="P_ADRESA" Type="varchar" MaxLength="255" />
+          <Property Name="P_JUDET" Type="varchar" MaxLength="50" />
+          <Property Name="P_ORAS" Type="varchar" MaxLength="50" />
+          <Property Name="P_TEL" Type="varchar" MaxLength="50" />
+          <Property Name="P_EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="P_ID_VALUE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SERVICII_CONTRACT">
+          <Key>
+            <PropertyRef Name="SC_ID" />
+          </Key>
+          <Property Name="SC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SC_C_ID" Type="int" Nullable="false" />
+          <Property Name="SC_S_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Incasari">
+          <Key>
+            <PropertyRef Name="c_id" />
+            <PropertyRef Name="C_NUMAR" />
+            <PropertyRef Name="C_DATA" />
+            <PropertyRef Name="P_NUME" />
+            <PropertyRef Name="P_PRENUME" />
+          </Key>
+          <Property Name="c_id" Type="int" Nullable="false" />
+          <Property Name="C_AVANS_DATA" Type="date" />
+          <Property Name="C_AVANS" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="C_DATA_DIFERENTA" Type="date" />
+          <Property Name="C_FACTURA" Type="varchar" MaxLength="50" />
+          <Property Name="C_CHITANTA" Type="varchar" MaxLength="50" />
+          <Property Name="C_NUMAR" Type="int" Nullable="false" />
+          <Property Name="C_DATA" Type="date" Nullable="false" />
+          <Property Name="P_NUME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_PRENUME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_TEL" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CONTRACTE_LIBRARIE">
+          <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="0..1" />
+          <End Role="CONTRACTE" Type="Self.CONTRACTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARIE">
+              <PropertyRef Name="L_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTE">
+              <PropertyRef Name="C_MONEDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACTE_PERSOANE">
+          <End Role="PERSOANE" Type="Self.PERSOANE" Multiplicity="1" />
+          <End Role="CONTRACTE" Type="Self.CONTRACTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSOANE">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTE">
+              <PropertyRef Name="C_PERSOANA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSOANE_LIBRARIE">
+          <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="0..1" />
+          <End Role="PERSOANE" Type="Self.PERSOANE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARIE">
+              <PropertyRef Name="L_ID" />
+            </Principal>
+            <Dependent Role="PERSOANE">
+              <PropertyRef Name="P_ID_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERVICII_CONTRACT_CONTRACTE">
+          <End Role="CONTRACTE" Type="Self.CONTRACTE" Multiplicity="1" />
+          <End Role="SERVICII_CONTRACT" Type="Self.SERVICII_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRACTE">
+              <PropertyRef Name="C_ID" />
+            </Principal>
+            <Dependent Role="SERVICII_CONTRACT">
+              <PropertyRef Name="SC_C_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERVICII_CONTRACT_LIBRARIE">
+          <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="1" />
+          <End Role="SERVICII_CONTRACT" Type="Self.SERVICII_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARIE">
+              <PropertyRef Name="L_ID" />
+            </Principal>
+            <Dependent Role="SERVICII_CONTRACT">
+              <PropertyRef Name="SC_S_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BLCModelStoreContainer">
+          <EntitySet Name="CONTRACTE" EntityType="Self.CONTRACTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LIBRARIE" EntityType="Self.LIBRARIE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSOANE" EntityType="Self.PERSOANE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERVICII_CONTRACT" EntityType="Self.SERVICII_CONTRACT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Incasari" EntityType="Self.Incasari" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Incasari].[c_id] AS [c_id], 
+    [Incasari].[C_AVANS_DATA] AS [C_AVANS_DATA], 
+    [Incasari].[C_AVANS] AS [C_AVANS], 
+    [Incasari].[C_DATA_DIFERENTA] AS [C_DATA_DIFERENTA], 
+    [Incasari].[C_FACTURA] AS [C_FACTURA], 
+    [Incasari].[C_CHITANTA] AS [C_CHITANTA], 
+    [Incasari].[C_NUMAR] AS [C_NUMAR], 
+    [Incasari].[C_DATA] AS [C_DATA], 
+    [Incasari].[P_NUME] AS [P_NUME], 
+    [Incasari].[P_PRENUME] AS [P_PRENUME], 
+    [Incasari].[P_TEL] AS [P_TEL]
+    FROM [dbo].[Incasari] AS [Incasari]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CONTRACTE_LIBRARIE" Association="Self.FK_CONTRACTE_LIBRARIE">
+            <End Role="LIBRARIE" EntitySet="LIBRARIE" />
+            <End Role="CONTRACTE" EntitySet="CONTRACTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACTE_PERSOANE" Association="Self.FK_CONTRACTE_PERSOANE">
+            <End Role="PERSOANE" EntitySet="PERSOANE" />
+            <End Role="CONTRACTE" EntitySet="CONTRACTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSOANE_LIBRARIE" Association="Self.FK_PERSOANE_LIBRARIE">
+            <End Role="LIBRARIE" EntitySet="LIBRARIE" />
+            <End Role="PERSOANE" EntitySet="PERSOANE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERVICII_CONTRACT_CONTRACTE" Association="Self.FK_SERVICII_CONTRACT_CONTRACTE">
+            <End Role="CONTRACTE" EntitySet="CONTRACTE" />
+            <End Role="SERVICII_CONTRACT" EntitySet="SERVICII_CONTRACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERVICII_CONTRACT_LIBRARIE" Association="Self.FK_SERVICII_CONTRACT_LIBRARIE">
+            <End Role="LIBRARIE" EntitySet="LIBRARIE" />
+            <End Role="SERVICII_CONTRACT" EntitySet="SERVICII_CONTRACT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BLCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CONTRACTE">
+          <Key>
+            <PropertyRef Name="C_ID" />
+          </Key>
+          <Property Name="C_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="C_NUMAR" Type="Int32" Nullable="false" />
+          <Property Name="C_DATA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="C_PERSOANA_ID" Type="Int32" Nullable="false" />
+          <Property Name="C_NR_PERS" Type="Int32" />
+          <Property Name="C_NR_ADULTI" Type="Int32" />
+          <Property Name="C_NR_COPII" Type="Int32" />
+          <Property Name="C_TARA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_ORAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_DE_LA_DATA" Type="DateTime" Precision="0" />
+          <Property Name="C_PANA_LA_DATA" Type="DateTime" Precision="0" />
+          <Property Name="C_HOTEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_HOTEL_STELE" Type="Int32" />
+          <Property Name="C_MENTIUNI" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="C_PRET" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="C_MONEDA" Type="Int32" />
+          <Property Name="C_AVANS" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="C_DATA_DIFERENTA" Type="DateTime" Precision="0" />
+          <Property Name="C_FACTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_CHITANTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_AVANS_DATA" Type="DateTime" Precision="0" />
+          <Property Name="C_AVANS2_DATA" Type="DateTime" Precision="0" />
+          <Property Name="C_AVANS2" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="C_FACTURA2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_CHITANTA2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_DATA_DIFERENTA2" Type="DateTime" Precision="0" />
+          <Property Name="C_AVANS3_DATA" Type="DateTime" Precision="0" />
+          <Property Name="C_AVANS3" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="C_FACTURA3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_CHITANTA3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_DATA_DIFERENTA3" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="LIBRARIE" Relationship="Self.FK_CONTRACTE_LIBRARIE" FromRole="CONTRACTE" ToRole="LIBRARIE" />
+          <NavigationProperty Name="PERSOANE" Relationship="Self.FK_CONTRACTE_PERSOANE" FromRole="CONTRACTE" ToRole="PERSOANE" />
+          <NavigationProperty Name="SERVICII_CONTRACT" Relationship="Self.FK_SERVICII_CONTRACT_CONTRACTE" FromRole="CONTRACTE" ToRole="SERVICII_CONTRACT" />
+        </EntityType>
+        <EntityType Name="LIBRARIE">
+          <Key>
+            <PropertyRef Name="L_ID" />
+          </Key>
+          <Property Name="L_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="L_NUME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="L_TIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CONTRACTEs" Relationship="Self.FK_CONTRACTE_LIBRARIE" FromRole="LIBRARIE" ToRole="CONTRACTE" />
+          <NavigationProperty Name="PERSOANEs" Relationship="Self.FK_PERSOANE_LIBRARIE" FromRole="LIBRARIE" ToRole="PERSOANE" />
+          <NavigationProperty Name="SERVICII_CONTRACT" Relationship="Self.FK_SERVICII_CONTRACT_LIBRARIE" FromRole="LIBRARIE" ToRole="SERVICII_CONTRACT" />
+        </EntityType>
+        <EntityType Name="PERSOANE">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_NUME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_PRENUME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_CNP" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="P_ID_TYPE" Type="Int32" />
+          <Property Name="P_DATA_NASTERII" Type="DateTime" Precision="0" />
+          <Property Name="P_ADRESA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="P_JUDET" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="P_ORAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="P_TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="P_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="P_ID_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CONTRACTEs" Relationship="Self.FK_CONTRACTE_PERSOANE" FromRole="PERSOANE" ToRole="CONTRACTE" />
+          <NavigationProperty Name="LIBRARIE" Relationship="Self.FK_PERSOANE_LIBRARIE" FromRole="PERSOANE" ToRole="LIBRARIE" />
+        </EntityType>
+        <EntityType Name="SERVICII_CONTRACT">
+          <Key>
+            <PropertyRef Name="SC_ID" />
+          </Key>
+          <Property Name="SC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SC_C_ID" Type="Int32" Nullable="false" />
+          <Property Name="SC_S_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CONTRACTE" Relationship="Self.FK_SERVICII_CONTRACT_CONTRACTE" FromRole="SERVICII_CONTRACT" ToRole="CONTRACTE" />
+          <NavigationProperty Name="LIBRARIE" Relationship="Self.FK_SERVICII_CONTRACT_LIBRARIE" FromRole="SERVICII_CONTRACT" ToRole="LIBRARIE" />
+        </EntityType>
+        <EntityType Name="Incasari">
+          <Key>
+            <PropertyRef Name="c_id" />
+            <PropertyRef Name="C_NUMAR" />
+            <PropertyRef Name="C_DATA" />
+            <PropertyRef Name="P_NUME" />
+            <PropertyRef Name="P_PRENUME" />
+          </Key>
+          <Property Name="c_id" Type="Int32" Nullable="false" />
+          <Property Name="C_AVANS_DATA" Type="DateTime" Precision="0" />
+          <Property Name="C_AVANS" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="C_DATA_DIFERENTA" Type="DateTime" Precision="0" />
+          <Property Name="C_FACTURA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_CHITANTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_NUMAR" Type="Int32" Nullable="false" />
+          <Property Name="C_DATA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="P_NUME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_PRENUME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_CONTRACTE_LIBRARIE">
+          <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="0..1" />
+          <End Role="CONTRACTE" Type="Self.CONTRACTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARIE">
+              <PropertyRef Name="L_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTE">
+              <PropertyRef Name="C_MONEDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTRACTE_PERSOANE">
+          <End Role="PERSOANE" Type="Self.PERSOANE" Multiplicity="1" />
+          <End Role="CONTRACTE" Type="Self.CONTRACTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSOANE">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="CONTRACTE">
+              <PropertyRef Name="C_PERSOANA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERVICII_CONTRACT_CONTRACTE">
+          <End Role="CONTRACTE" Type="Self.CONTRACTE" Multiplicity="1" />
+          <End Role="SERVICII_CONTRACT" Type="Self.SERVICII_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTRACTE">
+              <PropertyRef Name="C_ID" />
+            </Principal>
+            <Dependent Role="SERVICII_CONTRACT">
+              <PropertyRef Name="SC_C_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERSOANE_LIBRARIE">
+          <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="0..1" />
+          <End Role="PERSOANE" Type="Self.PERSOANE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARIE">
+              <PropertyRef Name="L_ID" />
+            </Principal>
+            <Dependent Role="PERSOANE">
+              <PropertyRef Name="P_ID_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERVICII_CONTRACT_LIBRARIE">
+          <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="1" />
+          <End Role="SERVICII_CONTRACT" Type="Self.SERVICII_CONTRACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LIBRARIE">
+              <PropertyRef Name="L_ID" />
+            </Principal>
+            <Dependent Role="SERVICII_CONTRACT">
+              <PropertyRef Name="SC_S_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BLCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CONTRACTEs" EntityType="Self.CONTRACTE" />
+          <EntitySet Name="LIBRARIEs" EntityType="Self.LIBRARIE" />
+          <EntitySet Name="PERSOANEs" EntityType="Self.PERSOANE" />
+          <EntitySet Name="SERVICII_CONTRACT" EntityType="Self.SERVICII_CONTRACT" />
+          <EntitySet Name="Incasaris" EntityType="Self.Incasari" />
+          <AssociationSet Name="FK_CONTRACTE_LIBRARIE" Association="Self.FK_CONTRACTE_LIBRARIE">
+            <End Role="LIBRARIE" EntitySet="LIBRARIEs" />
+            <End Role="CONTRACTE" EntitySet="CONTRACTEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTRACTE_PERSOANE" Association="Self.FK_CONTRACTE_PERSOANE">
+            <End Role="PERSOANE" EntitySet="PERSOANEs" />
+            <End Role="CONTRACTE" EntitySet="CONTRACTEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERVICII_CONTRACT_CONTRACTE" Association="Self.FK_SERVICII_CONTRACT_CONTRACTE">
+            <End Role="CONTRACTE" EntitySet="CONTRACTEs" />
+            <End Role="SERVICII_CONTRACT" EntitySet="SERVICII_CONTRACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERSOANE_LIBRARIE" Association="Self.FK_PERSOANE_LIBRARIE">
+            <End Role="LIBRARIE" EntitySet="LIBRARIEs" />
+            <End Role="PERSOANE" EntitySet="PERSOANEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERVICII_CONTRACT_LIBRARIE" Association="Self.FK_SERVICII_CONTRACT_LIBRARIE">
+            <End Role="LIBRARIE" EntitySet="LIBRARIEs" />
+            <End Role="SERVICII_CONTRACT" EntitySet="SERVICII_CONTRACT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BLCModelStoreContainer" CdmEntityContainer="BLCEntities">
+          <EntitySetMapping Name="CONTRACTEs">
+            <EntityTypeMapping TypeName="BLCModel.CONTRACTE">
+              <MappingFragment StoreEntitySet="CONTRACTE">
+                <ScalarProperty Name="C_ID" ColumnName="C_ID" />
+                <ScalarProperty Name="C_NUMAR" ColumnName="C_NUMAR" />
+                <ScalarProperty Name="C_DATA" ColumnName="C_DATA" />
+                <ScalarProperty Name="C_PERSOANA_ID" ColumnName="C_PERSOANA_ID" />
+                <ScalarProperty Name="C_NR_PERS" ColumnName="C_NR_PERS" />
+                <ScalarProperty Name="C_NR_ADULTI" ColumnName="C_NR_ADULTI" />
+                <ScalarProperty Name="C_NR_COPII" ColumnName="C_NR_COPII" />
+                <ScalarProperty Name="C_TARA" ColumnName="C_TARA" />
+                <ScalarProperty Name="C_ORAS" ColumnName="C_ORAS" />
+                <ScalarProperty Name="C_DE_LA_DATA" ColumnName="C_DE_LA_DATA" />
+                <ScalarProperty Name="C_PANA_LA_DATA" ColumnName="C_PANA_LA_DATA" />
+                <ScalarProperty Name="C_HOTEL" ColumnName="C_HOTEL" />
+                <ScalarProperty Name="C_HOTEL_STELE" ColumnName="C_HOTEL_STELE" />
+                <ScalarProperty Name="C_MENTIUNI" ColumnName="C_MENTIUNI" />
+                <ScalarProperty Name="C_PRET" ColumnName="C_PRET" />
+                <ScalarProperty Name="C_MONEDA" ColumnName="C_MONEDA" />
+                <ScalarProperty Name="C_AVANS" ColumnName="C_AVANS" />
+                <ScalarProperty Name="C_DATA_DIFERENTA" ColumnName="C_DATA_DIFERENTA" />
+                <ScalarProperty Name="C_FACTURA" ColumnName="C_FACTURA" />
+                <ScalarProperty Name="C_CHITANTA" ColumnName="C_CHITANTA" />
+                <ScalarProperty Name="C_AVANS_DATA" ColumnName="C_AVANS_DATA" />
+                <ScalarProperty Name="C_AVANS2_DATA" ColumnName="C_AVANS2_DATA" />
+                <ScalarProperty Name="C_AVANS2" ColumnName="C_AVANS2" />
+                <ScalarProperty Name="C_FACTURA2" ColumnName="C_FACTURA2" />
+                <ScalarProperty Name="C_CHITANTA2" ColumnName="C_CHITANTA2" />
+                <ScalarProperty Name="C_DATA_DIFERENTA2" ColumnName="C_DATA_DIFERENTA2" />
+                <ScalarProperty Name="C_AVANS3_DATA" ColumnName="C_AVANS3_DATA" />
+                <ScalarProperty Name="C_AVANS3" ColumnName="C_AVANS3" />
+                <ScalarProperty Name="C_FACTURA3" ColumnName="C_FACTURA3" />
+                <ScalarProperty Name="C_CHITANTA3" ColumnName="C_CHITANTA3" />
+                <ScalarProperty Name="C_DATA_DIFERENTA3" ColumnName="C_DATA_DIFERENTA3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LIBRARIEs">
+            <EntityTypeMapping TypeName="BLCModel.LIBRARIE">
+              <MappingFragment StoreEntitySet="LIBRARIE">
+                <ScalarProperty Name="L_ID" ColumnName="L_ID" />
+                <ScalarProperty Name="L_NUME" ColumnName="L_NUME" />
+                <ScalarProperty Name="L_TIP" ColumnName="L_TIP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSOANEs">
+            <EntityTypeMapping TypeName="BLCModel.PERSOANE">
+              <MappingFragment StoreEntitySet="PERSOANE">
+                <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+                <ScalarProperty Name="P_NUME" ColumnName="P_NUME" />
+                <ScalarProperty Name="P_PRENUME" ColumnName="P_PRENUME" />
+                <ScalarProperty Name="P_CNP" ColumnName="P_CNP" />
+                <ScalarProperty Name="P_ID_TYPE" ColumnName="P_ID_TYPE" />
+                <ScalarProperty Name="P_DATA_NASTERII" ColumnName="P_DATA_NASTERII" />
+                <ScalarProperty Name="P_ADRESA" ColumnName="P_ADRESA" />
+                <ScalarProperty Name="P_JUDET" ColumnName="P_JUDET" />
+                <ScalarProperty Name="P_ORAS" ColumnName="P_ORAS" />
+                <ScalarProperty Name="P_TEL" ColumnName="P_TEL" />
+                <ScalarProperty Name="P_EMAIL" ColumnName="P_EMAIL" />
+                <ScalarProperty Name="P_ID_VALUE" ColumnName="P_ID_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICII_CONTRACT">
+            <EntityTypeMapping TypeName="BLCModel.SERVICII_CONTRACT">
+              <MappingFragment StoreEntitySet="SERVICII_CONTRACT">
+                <ScalarProperty Name="SC_ID" ColumnName="SC_ID" />
+                <ScalarProperty Name="SC_C_ID" ColumnName="SC_C_ID" />
+                <ScalarProperty Name="SC_S_ID" ColumnName="SC_S_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incasaris">
+            <EntityTypeMapping TypeName="BLCModel.Incasari">
+              <MappingFragment StoreEntitySet="Incasari">
+                <ScalarProperty Name="c_id" ColumnName="c_id" />
+                <ScalarProperty Name="C_AVANS_DATA" ColumnName="C_AVANS_DATA" />
+                <ScalarProperty Name="C_AVANS" ColumnName="C_AVANS" />
+                <ScalarProperty Name="C_DATA_DIFERENTA" ColumnName="C_DATA_DIFERENTA" />
+                <ScalarProperty Name="C_FACTURA" ColumnName="C_FACTURA" />
+                <ScalarProperty Name="C_CHITANTA" ColumnName="C_CHITANTA" />
+                <ScalarProperty Name="C_NUMAR" ColumnName="C_NUMAR" />
+                <ScalarProperty Name="C_DATA" ColumnName="C_DATA" />
+                <ScalarProperty Name="P_NUME" ColumnName="P_NUME" />
+                <ScalarProperty Name="P_PRENUME" ColumnName="P_PRENUME" />
+                <ScalarProperty Name="P_TEL" ColumnName="P_TEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
