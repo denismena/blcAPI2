@@ -17,9 +17,71 @@ namespace blcAPI2.Controllers
         private BLCEntities db = new BLCEntities();
 
         // GET: api/CONTRACTE
-        public IQueryable<CONTRACTE> GetCONTRACTEs()
+        //public IQueryable<CONTRACTE> GetCONTRACTEs()
+        //{
+        //    return db.CONTRACTEs;
+        //}
+        public System.Object GetCONTRACTEs()
         {
-            return db.CONTRACTEs;
+            var result = from c in db.CONTRACTEs
+                         select new
+                         {
+                             c.C_ID,
+                             c.C_NUMAR,
+                             c.C_DATA,
+                             c.PERSOANE.P_NUME,
+                             c.PERSOANE.P_PRENUME,
+                             c.C_NR_PERS,
+                             c.C_NR_ADULTI,
+                             c.C_TARA
+                            ,
+                             c.C_ORAS
+                            ,
+                             c.C_DE_LA_DATA
+                            ,
+                             c.C_PANA_LA_DATA
+                            ,
+                             c.C_HOTEL
+                            ,
+                             c.C_HOTEL_STELE
+                            ,
+                             c.C_MENTIUNI
+                            ,
+                             c.C_PRET
+                            ,
+                             c.C_MONEDA
+                            ,
+                             c.C_AVANS
+                            ,
+                             c.C_DATA_DIFERENTA
+                            ,
+                             c.C_FACTURA
+                            ,
+                             c.C_CHITANTA
+                            ,
+                             c.C_AVANS_DATA
+                            ,
+                             c.C_AVANS2_DATA
+                            ,
+                             c.C_AVANS2
+                            ,
+                             c.C_FACTURA2
+                            ,
+                             c.C_CHITANTA2
+                            ,
+                             c.C_DATA_DIFERENTA2
+                            ,
+                             c.C_AVANS3_DATA
+                            ,
+                             c.C_AVANS3
+                            ,
+                             c.C_FACTURA3
+                            ,
+                             c.C_CHITANTA3
+                            ,
+                             c.C_DATA_DIFERENTA3
+                         };
+            return result.ToList();
         }
 
         // GET: api/CONTRACTE/5

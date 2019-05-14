@@ -48,7 +48,8 @@ namespace blcAPI2.Controllers
             {
                 return BadRequest();
             }
-
+            pERSOANE.LIBRARIE = null;
+            pERSOANE.CONTRACTEs = null;
             db.Entry(pERSOANE).State = EntityState.Modified;
             if (pERSOANE.P_EMAIL == "") pERSOANE.P_EMAIL = null;
             try
@@ -76,21 +77,16 @@ namespace blcAPI2.Controllers
         {
             try
             {
-                //if (!ModelState.IsValid)
-                //{
-                //    return BadRequest(ModelState);
-                //}
-
-                if (pERSOANE.P_ID == 0)
-                    db.PERSOANEs.Add(pERSOANE);
-                else
-                    db.Entry(pERSOANE).State = EntityState.Modified;
-
                 if (pERSOANE.P_ID_TYPE == 0) pERSOANE.P_ID_TYPE = null;
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }                
                 db.PERSOANEs.Add(pERSOANE);
                 db.SaveChanges();
 
-                return Ok();
+                //return Ok();
+                return CreatedAtRoute("DefaultApi", new { id = pERSOANE.P_ID }, pERSOANE);
             }
             catch (Exception ex)
             {
