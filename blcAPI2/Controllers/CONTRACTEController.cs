@@ -110,7 +110,8 @@ namespace blcAPI2.Controllers
             {
                 return BadRequest();
             }
-
+            cONTRACTE.LIBRARIE = null;
+            cONTRACTE.PERSOANE = null;
             db.Entry(cONTRACTE).State = EntityState.Modified;
 
             try
