@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BLCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BLCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CONTRACTE">
           <Key>
             <PropertyRef Name="C_ID" />
@@ -83,6 +83,7 @@ warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defi
             <PropertyRef Name="C_DATA" />
             <PropertyRef Name="P_NUME" />
             <PropertyRef Name="P_PRENUME" />
+            <PropertyRef Name="L_NUME" />
           </Key>
           <Property Name="c_id" Type="int" Nullable="false" />
           <Property Name="C_AVANS_DATA" Type="date" />
@@ -95,6 +96,8 @@ warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defi
           <Property Name="P_NUME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="P_PRENUME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="P_TEL" Type="varchar" MaxLength="50" />
+          <Property Name="C_PRET" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="L_NUME" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_CONTRACTE_LIBRARIE">
           <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="0..1" />
@@ -173,7 +176,9 @@ warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defi
     [Incasari].[C_DATA] AS [C_DATA], 
     [Incasari].[P_NUME] AS [P_NUME], 
     [Incasari].[P_PRENUME] AS [P_PRENUME], 
-    [Incasari].[P_TEL] AS [P_TEL]
+    [Incasari].[P_TEL] AS [P_TEL], 
+    [Incasari].[C_PRET] AS [C_PRET], 
+    [Incasari].[L_NUME] AS [L_NUME]
     FROM [dbo].[Incasari] AS [Incasari]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_CONTRACTE_LIBRARIE" Association="Self.FK_CONTRACTE_LIBRARIE">
@@ -197,8 +202,7 @@ warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defi
             <End Role="SERVICII_CONTRACT" EntitySet="SERVICII_CONTRACT" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BLCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -288,6 +292,7 @@ warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defi
             <PropertyRef Name="C_DATA" />
             <PropertyRef Name="P_NUME" />
             <PropertyRef Name="P_PRENUME" />
+            <PropertyRef Name="L_NUME" />
           </Key>
           <Property Name="c_id" Type="Int32" Nullable="false" />
           <Property Name="C_AVANS_DATA" Type="DateTime" Precision="0" />
@@ -300,6 +305,8 @@ warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defi
           <Property Name="P_NUME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="P_PRENUME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="P_TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="C_PRET" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="L_NUME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_CONTRACTE_LIBRARIE">
           <End Role="LIBRARIE" Type="Self.LIBRARIE" Multiplicity="0..1" />
@@ -470,6 +477,8 @@ warning 6002: The table/view 'BLC.dbo.Incasari' does not have a primary key defi
           <EntitySetMapping Name="Incasaris">
             <EntityTypeMapping TypeName="BLCModel.Incasari">
               <MappingFragment StoreEntitySet="Incasari">
+                <ScalarProperty Name="L_NUME" ColumnName="L_NUME" />
+                <ScalarProperty Name="C_PRET" ColumnName="C_PRET" />
                 <ScalarProperty Name="c_id" ColumnName="c_id" />
                 <ScalarProperty Name="C_AVANS_DATA" ColumnName="C_AVANS_DATA" />
                 <ScalarProperty Name="C_AVANS" ColumnName="C_AVANS" />

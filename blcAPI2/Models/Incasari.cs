@@ -25,5 +25,7 @@ namespace blcAPI2.Models
         public string P_NUME { get; set; }
         public string P_PRENUME { get; set; }
         public string P_TEL { get; set; }
+        public Nullable<decimal> C_PRET { get; set; }
+        public string L_NUME { get; set; }
     }
 }
