@@ -111,10 +111,35 @@ namespace blcAPI2.Controllers
                 return BadRequest();
             }
 
+            var oldSerList = db.SERVICII_CONTRACT.Where(w => w.SC_C_ID == id).Select(s => s.SC_S_ID).ToArray(); ;
+            var newSerList = cONTRACTE.SERVICII_CONTRACT.Select(s => s.SC_S_ID).ToArray();
+
+            var toAdd = newSerList.Except(oldSerList);
+            //var toDelete = oldSerList.Except(newSerList).Select(s=>s.SC_S_ID).ToArray();
+            var toDelete = oldSerList.Except(newSerList);
+
+            cONTRACTE.PERSOANE = null;
+            cONTRACTE.LIBRARIE = null;
+            cONTRACTE.SERVICII_CONTRACT = null;
             db.Entry(cONTRACTE).State = EntityState.Modified;
 
             try
             {
+                //add new services
+                var addService = new SERVICII_CONTRACT();
+                foreach (var sc in toAdd)
+                {
+                    addService = new SERVICII_CONTRACT();
+                    addService.SC_C_ID = id;
+                    addService.SC_S_ID = sc;
+                    db.SERVICII_CONTRACT.Add(addService);
+                }
+
+                //delete services
+                foreach (var scd in toDelete)
+                {
+                    db.SERVICII_CONTRACT.Remove(db.SERVICII_CONTRACT.Where(w => w.SC_S_ID == scd && w.SC_C_ID == id).FirstOrDefault());
+                }
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
@@ -136,15 +161,27 @@ namespace blcAPI2.Controllers
         [ResponseType(typeof(CONTRACTE))]
         public IHttpActionResult PostCONTRACTE(CONTRACTE cONTRACTE)
         {
-            if (!ModelState.IsValid)
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+            try
             {
-                return BadRequest(ModelState);
+                //Contracte
+                db.CONTRACTEs.Add(cONTRACTE);
+
+                //Servicii
+                foreach(var sc in cONTRACTE.SERVICII_CONTRACT)
+                {
+                    db.SERVICII_CONTRACT.Add(sc);
+                }
+                db.SaveChanges();
+
+                return CreatedAtRoute("DefaultApi", new { id = cONTRACTE.C_ID }, cONTRACTE);
             }
-
-            db.CONTRACTEs.Add(cONTRACTE);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = cONTRACTE.C_ID }, cONTRACTE);
+            catch(Exception ex)
+            { throw ex; }
+            
         }
 
         // DELETE: api/CONTRACTE/5

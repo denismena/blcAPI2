@@ -173,6 +173,7 @@
     <Compile Include="Controllers\IncasariController.cs" />
     <Compile Include="Controllers\LIBRARIEController.cs" />
     <Compile Include="Controllers\PERSOANEController.cs" />
+    <Compile Include="Controllers\SERVICII_CONTRACTController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
